@@ -62,22 +62,22 @@
             margin: 0 8px;
         }
         
-        .main-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 60px 24px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 120px;
-            align-items: start;
-        }
+.main-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px 24px;        /* ↓ reduce top/bottom padding */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;                 /* ↓ reduce large gap between columns */
+  align-items: start;
+}
         
         .login-panel,
         .info-panel {
          background: #ffffff;
   border-radius: 12px;
   border: 1px solid #e1e5e9;
-  padding: 48px;
+  padding: 32px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 
   /* ↓ NEW */
@@ -273,10 +273,10 @@
             font-size: 18px;        /* ↓ slightly smaller than 20px */
   font-weight: 600;       /* ↓ less heavy than 700 */
   color: #111827;
-  margin: 0 0 16px 0;     /* ↓ reduce bottom margin from 24px to 16px */
+  margin: 0 0 12px 0;     /* ↓ reduce bottom margin from 24px to 16px */
   
   display: block;         /* ensures full-width, own line */
-  text-align: left;       /* aligns left, feels lighter (optional) */
+  text-align: center;       /* aligns left, feels lighter (optional) */
         }
         
         .status-card {
