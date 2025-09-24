@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Salesforce Customer Secure Login Page. Login to your Salesforce Customer Account." />
+    <title>Login | Salesforce</title>
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" type="text/css" href="/css/sfdc_210.css?v=6" />
+    <script type="text/javascript" src="https://navbar.lacity.org/global_nav.js"></script>
+    <style>
+        html { visibility: visible; }
+        * { box-sizing: border-box; }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Salesforce Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .header-bar {
+            background: #ffffff;
+            border-bottom: 1px solid #e1e5e9;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .logo-section img {
+            height: 40px;
+        }
+        
+        .la-city-logo {
+            height: 35px;
+        }
+        
+        .company-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1f2937;
+        }
+        
+        .logos-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-divider {
+            width: 1px;
+            height: 30px;
+            background-color: #e1e5e9;
+            margin: 0 8px;
+        }
+        
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 120px;
+            align-items: start;
+        }
+        
+        .login-panel,
+        .info-panel {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e1e5e9;
+            padding: 48px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            min-height: 600px;
+        }
+        
+        .login-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .login-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #111827;
+            margin: 0 0 8px 0;
+        }
+        
+        .login-subtitle {
+            font-size: 16px;
+            color: #6b7280;
+            margin: 0;
+        }
+        
+        .login-section {
+            margin-bottom: 32px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #374151;
+            margin: 0 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .sso-section {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .sso-button {
+            width: 100%;
+            background: #ffffff;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #374151;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.2s;
+        }
+        
+        .sso-button:hover {
+            border-color: #9ca3af;
+            background: #f9fafb;
+        }
+        
+        .sso-button:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .google-icon {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 32px 0;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+        
+        .divider span {
+            padding: 0 16px;
+            font-size: 14px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            background: #ffffff;
+            transition: border-color 0.2s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .form-input::placeholder {
+            color: #9ca3af;
+        }
+        
+        .login-button {
+            width: 100%;
+            background: #0176d3;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .login-button:hover {
+            background: #014486;
+        }
+        
+        .login-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(1, 118, 211, 0.3);
+        }
+        
+        .remember-section {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 20px 0;
+        }
+        
+        .remember-section input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .remember-section label {
+            font-size: 14px;
+            color: #4b5563;
+            margin: 0;
+            font-weight: 400;
+        }
+        
+        .forgot-link {
+            display: block;
+            text-align: center;
+            margin-top: 16px;
+            font-size: 14px;
+            color: #0176d3;
+            text-decoration: none;
+        }
+        
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+        
+        .info-header {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+            margin: 0 0 24px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-align: center;
+            justify-content: center;
+        }
+        
+        .status-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #10b981;
+        }
+        
+        .status-card.warning {
+            border-left-color: #f59e0b;
+            background: #fefbf0;
+        }
+        
+        .status-card.error {
+            border-left-color: #ef4444;
+            background: #fef2f2;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-indicator.green {
+            background-color: #10b981;
+        }
+        
+        .status-indicator.yellow {
+            background-color: #f59e0b;
+        }
+        
+        .status-indicator.red {
+            background-color: #ef4444;
+        }
+        
+        .status-header {
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+            margin: 0 0 8px 0;
+        }
+        
+        .status-text {
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.5;
+            margin: 0 0 8px 0;
+        }
+        
+        .status-time {
+            font-size: 12px;
+            color: #6b7280;
+            margin: 0;
+        }
+        
+        .help-section {
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 24px;
+            margin-top: 24px;
+        }
+        
+        .help-header {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 0 0 16px 0;
+        }
+        
+        .help-link {
+            display: block;
+            color: #0176d3;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 8px;
+            padding: 4px 0;
+        }
+        
+        .help-link:hover {
+            text-decoration: underline;
+        }
+        
+        .notice-box {
+            background: #dbeafe;
+            border: 1px solid #93c5fd;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+        
+        .notice-text {
+            font-size: 14px;
+            color: #1e40af;
+            margin: 0;
+        }
+        
+        .caps-warning {
+            color: #ef4444;
+            font-size: 14px;
+            margin-top: 4px;
+            display: none;
+        }
+        
+        .collapsible-section {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+        
+        .collapsible-header {
+            background: #f8fafc;
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #374151;
+            transition: background-color 0.2s;
+        }
+        
+        .collapsible-header:hover {
+            background: #f1f5f9;
+        }
+        
+        .collapsible-header.active {
+            background: #e0f2fe;
+            color: #0176d3;
+        }
+        
+        .collapsible-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+        
+        .collapsible-content.active {
+            max-height: 500px;
+            padding: 20px;
+        }
+        
+        .collapse-icon {
+            font-size: 18px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+        
+        .collapse-icon.active {
+            transform: rotate(45deg);
+        }
+        
+        .section-description {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 60px;
+                max-width: 500px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 32px 16px;
+            }
+            
+            .login-panel,
+            .info-panel {
+                padding: 32px 24px;
+            }
+        }
+    </style>
+    <script type="text/javascript">if (self == top) {document.documentElement.style.visibility = 'visible';} else {document.write = ''; top.location = self.location; setTimeout(function(){document.body.innerHTML='';}, 1);window.self.onload=function(evt){document.body.innerHTML='';};}</script>
+    <script>var SFDCSessionVars={"server":"https:\/\/test.salesforce.com\/login\/sessionserver212.html","im":true,"ah":"active","save":"Save","saveOne":"Save 1 Change","sum":"#p# Saved Usernames","iaac":false,"hac":"Choose a Username","suo":"1 Saved Username","title":" | Salesforce","saveMany":"Save #p# Changes","lpt":"Login","lllbl":"Lightning Login","host":"test.salesforce.com","le":true,"heu":"Edit Username List","ic":false,"lh":false,"ur":"https:\/\/lacps--uat.sandbox.my.salesforce.com","hidp":"Log In Using","ih":"inactive","dc":"Username removed. Click Save to Commit Changes."};</script>
+    <script src="/jslibrary/SfdcSessionBase208.js"></script>
+    <script src="/jslibrary/LoginHint208.js"></script>
+    <script>LoginHint.hideLoginForm();</script>
+    <link rel="canonical" href="https://lacps--uat.sandbox.my.salesforce.com?locale=us"/>
+</head>
+<body onload="lazyload();">
+    <div class="header-bar">
+        <div class="logo-section">
+            <div class="logos-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salesforce.com_logo.svg/1024px-Salesforce.com_logo.svg.png" alt="Salesforce" height="40">
+                <div class="logo-divider"></div>
+                <img src="https://permitla.lacitydbs.org/Login/login_files/logo_ladbs_horiz.png" alt="LA Department of Building and Safety" class="la-city-logo">
+            </div>
+            <span class="company-name">Los Angeles City Permitting System</span>
+        </div>
+    </div>
+    
+    <div class="main-container">
+        <div class="login-panel">
+            <div class="login-header">
+                <h1 class="login-title">Sign In</h1>
+                <p class="login-subtitle">Access your LA City Permitting workspace.</p>
+            </div>
+            
+            <div class="login-section">
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleSection('city-employees')">
+                        <span>City Employees</span>
+                        <span class="collapse-icon" id="city-employees-icon">+</span>
+                    </div>
+                    <div class="collapsible-content" id="city-employees-content">
+                        <p class="section-description">Sign in with your City of Los Angeles Google account for single sign-on access.</p>
+                        <button class="sso-button" onclick="IdpOptions.useIdp('LACPS Google', 'https://lacps--uat.sandbox.my.salesforce.com/saml/authn-request.jsp?saml_request_id=_2CAAAAZmC4tYJMDAwMDAwMDAwMDAwMDAwAAABAGhjPzpPCrs3z_7LRVWckYGAF6SPXUnIGl3RF_0wHPNFq6M3FDIqs9hJN39X7Xr_5-i6O4KfIg3_Hv7JNwyZNEJmfy0ycPzBNVOY29NSPtHhD5gMeb5NP9IbF9X2EiLdVH6iIXnGLhORpcR2TI99WT6m1kOc1fqIN1sKjxtKPvDWHtt8nOxI6d6SkMoljHVKML3QOO5dzvm9nZmPRU5Xft4Xs9oGDJe1gklBcG5SM6AyXXeoYaebz-0pqMBradBivQ&amp;saml_acs=https%3A%2F%2Flacps--uat.sandbox.my.salesforce.com&amp;saml_binding_type=HttpRedirect&amp;Issuer=https%3A%2F%2Flacps--uat.sandbox.my.salesforce.com&amp;samlSsoConfig=0LEHr000000x09a&amp;RelayState=%2Fvisualforce%2Fsession%3Furl%3Dhttps%253A%252F%252Flacps--uat.sandbox.lightning.force.com%252Flightning%252Fpage%25252Fhome');">
+                            <img src="https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png" alt="" class="google-icon">
+                            <span>Continue with Google</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleSection('salesforce-login')">
+                        <span>Other Users</span>
+                        <span class="collapse-icon" id="salesforce-login-icon">+</span>
+                    </div>
+                    <div class="collapsible-content" id="salesforce-login-content">
+                        <p class="section-description">External users and contractors can sign in using their Salesforce username and password.</p>
+                        <form name="login" method="post" id="login_form" onsubmit="handleLogin(); return false;" action="https://lacps--uat.sandbox.my.salesforce.com/" target="_top" novalidate="novalidate">
+                            <fieldset style="display:none">
+                                <input type="hidden" name="un" id="un_hfid" value="" />
+                                <input type="hidden" name="width" value="" />
+                                <input type="hidden" name="height" value="" />
+                                <input type="hidden" name="hasRememberUn" value="true" />
+                                <input type="hidden" id="login_startUrl" name="startURL" value="/visualforce/session?url=https%3A%2F%2Flacps--uat.sandbox.lightning.force.com%2Flightning%2Fpage%2Fhome" />
+                                <input type="hidden" name="loginURL" value="" />
+                                <input type="hidden" name="loginType" value="" />
+                                <input type="hidden" name="useSecure" value="true" />
+                                <input type="hidden" name="local" value="" />
+                                <input type="hidden" name="lt" value="standard" />
+                                <input type="hidden" name="qs" value="" />
+                                <input type="hidden" name="locale" value="" />
+                                <input type="hidden" name="oauth_token" value="" />
+                                <input type="hidden" name="oauth_callback" value="" />
+                                <input type="hidden" name="login" value="" />
+                                <input type="hidden" name="serverid" value="" />
+                                <input type="hidden" name="display" value="page" />
+                            </fieldset>
+                            <div class="form-group">
+                                <label for="username" class="form-label">Username</label>
+                                <input class="form-input" type="email" value="" name="username" id="username" placeholder="Enter your username">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password" class="form-label">Password</label>
+                                <input class="form-input" type="password" id="password" name="pw" placeholder="Enter your password" onkeypress="checkCaps(event)" autocomplete="off"/>
+                                <div id="pwcaps" class="caps-warning">
+                                    <img id="pwcapsicon" alt="Caps Lock is on." width="12"/> Caps Lock is on.
+                                </div>
+                            </div>
+                            
+                            <button class="login-button" type="submit" id="Login" name="Login">Sign In</button>
+                            
+                            <div class="remember-section">
+                                <input type="checkbox" id="rememberUn" name="rememberUn">
+                                <label for="rememberUn">Remember username</label>
+                            </div>
+                            
+                            <a id="forgot_password_link" class="forgot-link" href="/secur/forgotpassword.jsp?locale=us&lqs=startURL%3D%252Fvisualforce%252Fsession%253Furl%253Dhttps%25253A%25252F%25252Flacps--uat.sandbox.lightning.force.com%25252Flightning%25252Fpage%25252Fhome%26ec%3D302">Forgot your password?</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-panel">
+            <h2 class="info-header">
+                Updates
+            </h2>
+            
+            <div class="status-card">
+                <div class="status-header">
+                    <span class="status-indicator green"></span>All Systems Operational
+                </div>
+                <p class="status-text">All Salesforce services are currently running normally without any reported issues.</p>
+                <p class="status-time">Last checked: 2 minutes ago</p>
+            </div>
+            
+            <div class="status-card warning">
+                <div class="status-header">
+                    <span class="status-indicator yellow"></span>Scheduled Maintenance
+                </div>
+                <p class="status-text">Planned system maintenance is scheduled for Sunday, January 28, 2025 from 2:00 AM to 6:00 AM PST. Some features may be temporarily unavailable during this period.</p>
+                <p class="status-time">Maintenance window: January 28, 2025</p>
+            </div>
+            
+            <div class="help-section">
+                <div class="help-header">Need Help?</div>
+                <a href="mailto:help@lacity.org" class="help-link">Email IT Support</a>
+                <a href="#" class="help-link" onclick="alert('For access issues, contact your department administrator.')">Report Access Problems</a>
+                <a href="#" class="help-link" onclick="alert('Training materials are available on the City intranet.')">User Training Materials</a>
+                <a href="https://status.salesforce.com" class="help-link" target="_blank">System Status Page</a>
+                
+                <div class="notice-box">
+                    <p class="notice-text">
+                        <strong>Important:</strong> New users must complete mandatory security training before accessing the system. Contact your department administrator for enrollment information.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>LoginHint.getSavedIdentities(false);</script>
+    <script src="/jslibrary/baselogin4.js"></script>
+    <script src="/jslibrary/LoginMarketingSurveyResponse.js"></script>
+    <script>function handleLogin(){document.login.un.value=document.login.username.value;document.login.width.value=screen.width;document.login.height.value=screen.height;document.getElementById("Login").disabled=true;document.getElementById("login_form").submit();}function lazyload(){document.getElementById("pwcapsicon").src="/img/icon/capslock_blue.png";}loader();</script>
+    <script>
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId + '-content');
+            const icon = document.getElementById(sectionId + '-icon');
+            const header = icon.parentElement;
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.classList.remove('active');
+                header.classList.remove('active');
+                icon.textContent = '+';
+            } else {
+                // Close other sections
+                document.querySelectorAll('.collapsible-content.active').forEach(el => {
+                    el.classList.remove('active');
+                });
+                document.querySelectorAll('.collapse-icon.active').forEach(el => {
+                    el.classList.remove('active');
+                    el.textContent = '+';
+                });
+                document.querySelectorAll('.collapsible-header.active').forEach(el => {
+                    el.classList.remove('active');
+                });
+                
+                // Open clicked section
+                content.classList.add('active');
+                icon.classList.add('active');
+                header.classList.add('active');
+                icon.textContent = '−';
+            }
+        }
+        
+        // Auto-open the first section on page load
+        window.addEventListener('load', function() {
+            toggleSection('city-employees');
+        });
+    </script>
+</body>
+</html>
+
