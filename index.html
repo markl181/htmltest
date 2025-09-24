@@ -270,15 +270,13 @@
         }
         
         .info-header {
-            font-size: 20px;
-            font-weight: 700;
-            color: #111827;
-            margin: 0 0 24px 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-align: center;
-            justify-content: center;
+            font-size: 18px;        /* ↓ slightly smaller than 20px */
+  font-weight: 600;       /* ↓ less heavy than 700 */
+  color: #111827;
+  margin: 0 0 16px 0;     /* ↓ reduce bottom margin from 24px to 16px */
+  
+  display: block;         /* ensures full-width, own line */
+  text-align: left;       /* aligns left, feels lighter (optional) */
         }
         
         .status-card {
