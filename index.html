@@ -7,7 +7,7 @@
     <title>Login | Salesforce</title>
     <meta name="format-detection" content="telephone=no" />
     <link rel="stylesheet" type="text/css" href="/css/sfdc_210.css?v=6" />
-    <script type="text/javascript" src="https://navbar.lacity.org/global_nav.js"></script>
+    <!--<script type="text/javascript" src="https://navbar.lacity.org/global_nav.js"></script>-->
     <style>
         html { visibility: visible; }
         * { box-sizing: border-box; }
@@ -74,12 +74,19 @@
         
         .login-panel,
         .info-panel {
-            background: #ffffff;
-            border-radius: 12px;
-            border: 1px solid #e1e5e9;
-            padding: 48px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            min-height: 600px;
+         background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e1e5e9;
+  padding: 48px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+  /* ↓ NEW */
+  display: flex;
+  flex-wrap: wrap;     /* allow wrapping if screen is narrow */
+  gap: 24px;           /* spacing between child blocks */
+  min-height: auto;    /* remove forced tall box */
+  width: 100%;         /* take full available width */
+  box-sizing: border-box;
         }
         
         .login-header {
@@ -338,6 +345,11 @@
             padding: 24px;
             margin-top: 24px;
         }
+
+        .status-card,
+.help-section {
+  flex: 1 1 300px;   /* grow, shrink, min-width */
+}
         
         .help-header {
             font-size: 16px;
@@ -464,8 +476,7 @@
     <link rel="canonical" href="https://lacps--uat.sandbox.my.salesforce.com?locale=us"/>
 </head>
 <body onload="lazyload();">
-    
-    
+        
     <div class="main-container">
               
         <div class="info-panel">
